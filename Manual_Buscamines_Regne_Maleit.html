@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual - Buscamines del Regne Maleït</title>
+  <style>
+    :root {
+      --fons: #140d08;
+      --fons-2: #211409;
+      --tinta: #f4ead8;
+      --text: #d7c7a4;
+      --muted: #a68b5d;
+      --daurat: #d6a63e;
+      --daurat-clar: #f2d889;
+      --vermell: #7d1118;
+      --vermell-viu: #b52722;
+      --verd: #1f5b2c;
+      --verd-viu: #22a34d;
+      --pedra: #332821;
+      --pergami: #d9bd83;
+      --ombra: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.09), transparent 32%),
+        radial-gradient(circle at 6% 94%, rgba(214, 166, 62, 0.12), transparent 24%),
+        radial-gradient(circle at 95% 100%, rgba(214, 166, 62, 0.10), transparent 25%),
+        linear-gradient(180deg, #1e130c 0%, #090604 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 7px 7px;
+      mix-blend-mode: screen;
+    }
+
+    .page {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 52px;
+    }
+
+    .hero {
+      min-height: 520px;
+      display: grid;
+      align-items: center;
+      border: 1px solid rgba(214, 166, 62, 0.32);
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(20, 13, 8, 0.96), rgba(20, 13, 8, 0.70)),
+        radial-gradient(circle at 72% 48%, rgba(125, 17, 24, 0.40), transparent 30%),
+        linear-gradient(135deg, #26160d 0%, #090604 100%);
+      box-shadow: 0 28px 80px var(--ombra);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(214, 166, 62, 0.18);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 56px;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--daurat-clar);
+      border: 1px solid rgba(214, 166, 62, 0.48);
+      background: rgba(48, 27, 11, 0.82);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font: 700 12px Arial, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 22px 0 16px;
+      color: var(--tinta);
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 0;
+      color: #e8dcc2;
+      font-size: 21px;
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      color: #221205;
+      background: linear-gradient(180deg, #f0d37d, #bd8428);
+      border: 1px solid #f6dda0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font: 800 13px Arial, sans-serif;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .button.secondary {
+      color: var(--daurat-clar);
+      background: rgba(48, 27, 11, 0.72);
+      border-color: rgba(214, 166, 62, 0.42);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid rgba(214, 166, 62, 0.22);
+      border-radius: 14px;
+      background: rgba(16, 10, 6, 0.88);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav a {
+      color: var(--daurat-clar);
+      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font: 700 12px Arial, sans-serif;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover {
+      background: rgba(214, 166, 62, 0.16);
+    }
+
+    section {
+      margin-top: 22px;
+      padding: 32px;
+      border: 1px solid rgba(214, 166, 62, 0.24);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(35, 23, 15, 0.92), rgba(15, 10, 7, 0.96));
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.24);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--daurat-clar);
+      font-size: 34px;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      color: var(--tinta);
+      font-size: 20px;
+    }
+
+    p {
+      line-height: 1.62;
+      margin: 0 0 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid rgba(214, 166, 62, 0.26);
+      border-radius: 12px;
+      background: rgba(10, 7, 5, 0.54);
+    }
+
+    .card strong {
+      color: var(--daurat-clar);
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      color: var(--daurat-clar);
+      background: rgba(214, 166, 62, 0.12);
+      border: 1px solid rgba(214, 166, 62, 0.36);
+      font-size: 22px;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .step::before {
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #261407;
+      background: var(--daurat);
+      font: 800 16px Arial, sans-serif;
+    }
+
+    .risk {
+      background:
+        linear-gradient(180deg, rgba(125, 17, 24, 0.72), rgba(12, 7, 5, 0.96)),
+        radial-gradient(circle at 72% 28%, rgba(255, 110, 45, 0.26), transparent 30%);
+      border-color: rgba(242, 216, 137, 0.45);
+    }
+
+    .risk-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .choice {
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+    }
+
+    .choice.safe {
+      background: linear-gradient(180deg, rgba(34, 163, 77, 0.30), rgba(10, 32, 17, 0.82));
+    }
+
+    .choice.danger {
+      background: linear-gradient(180deg, rgba(181, 39, 34, 0.44), rgba(42, 8, 6, 0.88));
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .score {
+      text-align: center;
+      padding: 14px 10px;
+      border-radius: 12px;
+      color: var(--daurat-clar);
+      background: rgba(48, 27, 11, 0.84);
+      border: 1px solid rgba(214, 166, 62, 0.30);
+      font: 800 16px Arial, sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(10, 7, 5, 0.58);
+    }
+
+    th,
+    td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(214, 166, 62, 0.16);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--daurat-clar);
+      background: rgba(48, 27, 11, 0.78);
+      font: 800 12px Arial, sans-serif;
+      text-transform: uppercase;
+    }
+
+    .kbd {
+      display: inline-block;
+      min-width: 28px;
+      padding: 4px 7px;
+      margin: 0 2px;
+      border-radius: 6px;
+      color: var(--tinta);
+      background: #2f251d;
+      border: 1px solid rgba(214, 166, 62, 0.28);
+      font: 700 12px Arial, sans-serif;
+      text-align: center;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(430px, calc(100% - 18px));
+        padding-top: 10px;
+      }
+
+      .hero {
+        min-height: 620px;
+      }
+
+      .hero-inner {
+        padding: 34px 24px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      section {
+        padding: 22px;
+      }
+
+      h2 {
+        font-size: 27px;
+      }
+
+      .grid,
+      .grid.two,
+      .risk-panel,
+      .score-row {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        position: static;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #222;
+      }
+
+      body::before,
+      .nav {
+        display: none;
+      }
+
+      .hero,
+      section {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero" id="inici">
+      <div class="hero-inner">
+        <span class="eyebrow">Manual d'instruccions</span>
+        <h1>Buscamines del Regne Maleït</h1>
+        <p class="subtitle">
+          Un Buscamines d'estètica medieval on cada casella pot ocultar una trampa.
+          Dedueix, marca, revela i decideix si vols conservar la victòria o maleir la partida
+          amb una ampliació de risc.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#com-jugar">Com jugar</a>
+          <a class="button secondary" href="#ampliacio">Ampliació Maleïda</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Seccions del manual">
+      <a href="#objectiu">Objectiu</a>
+      <a href="#controls">Controls</a>
+      <a href="#personatges">Personatges</a>
+      <a href="#dificultats">Dificultats</a>
+      <a href="#ampliacio">Ampliació</a>
+      <a href="#puntuacio">Puntuació</a>
+      <a href="#ranquing">Rànquing</a>
+    </nav>
+
+    <section id="objectiu">
+      <h2>Objectiu del joc</h2>
+      <div class="grid two">
+        <div>
+          <p>
+            L'objectiu és descobrir totes les caselles segures del tauler intentant no activar cap trampa.
+            Les caselles revelades mostren números que indiquen quantes trampes hi ha al voltant.
+          </p>
+          <p>
+            Si descobreixes una trampa, perds una vida. La partida només acaba quan el personatge
+            es queda sense vides.
+          </p>
+        </div>
+        <div class="card">
+          <span class="icon">☠</span>
+          <h3>Regla principal</h3>
+          <p>
+            El primer clic sempre és segur. El joc col·loca les trampes després del primer moviment
+            per evitar que la partida acabi abans de començar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="com-jugar">
+      <h2>Com es juga</h2>
+      <div class="steps">
+        <div class="step">
+          <div>
+            <h3>Tria personatge i dificultat</h3>
+            <p>Introdueix el teu nom, selecciona un personatge i escull el nivell del tauler.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Revela caselles</h3>
+            <p>Fes clic sobre una casella per descobrir si és segura. Si mostra un número, aquest indica les trampes adjacents.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Marca possibles trampes</h3>
+            <p>Utilitza banderes per senyalar les caselles sospitoses i evitar perdre vides per error.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div>
+            <h3>Guanya o arrisca</h3>
+            <p>Quan reveles totes les caselles segures, pots assegurar els punts o ampliar el tauler.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="controls">
+      <h2>Controls</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Acció</th>
+            <th>Ratolí</th>
+            <th>Teclat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Revelar casella</td>
+            <td>Clic esquerre</td>
+            <td><span class="kbd">Enter</span> o <span class="kbd">Espai</span></td>
+          </tr>
+          <tr>
+            <td>Marcar bandera</td>
+            <td>Clic dret o mode bandera</td>
+            <td><span class="kbd">F</span> o <span class="kbd">Shift</span> + <span class="kbd">Enter</span></td>
+          </tr>
+          <tr>
+            <td>Moure cursor</td>
+            <td>Passar el cursor per sobre</td>
+            <td><span class="kbd">↑</span> <span class="kbd">↓</span> <span class="kbd">←</span> <span class="kbd">→</span></td>
+          </tr>
+          <tr>
+            <td>Sortir de partida</td>
+            <td>Tancar finestra</td>
+            <td><span class="kbd">Esc</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="personatges">
+      <h2>Personatges</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="icon">🧙</span>
+          <h3>Mag</h3>
+          <p><strong>Vides:</strong> 3</p>
+          <p><strong>Velocitat:</strong> 7</p>
+          <p><strong>Bonus rapidesa:</strong> x1.5</p>
+          <p>És el personatge més ràpid. Ideal si vols buscar puntuacions altes amb partides ràpides.</p>
+        </article>
+        <article class="card">
+          <span class="icon">⚔</span>
+          <h3>Guerrer</h3>
+          <p><strong>Vides:</strong> 5</p>
+          <p><strong>Velocitat:</strong> 3</p>
+          <p><strong>Bonus rapidesa:</strong> x0.8</p>
+          <p>Té més resistència dins la sessió, però obté menys avantatge per rapidesa.</p>
+        </article>
+        <article class="card">
+          <span class="icon">✝</span>
+          <h3>Sacerdot</h3>
+          <p><strong>Vides:</strong> 4</p>
+          <p><strong>Velocitat:</strong> 5</p>
+          <p><strong>Bonus rapidesa:</strong> x1.0</p>
+          <p>Opció equilibrada per jugar amb seguretat sense renunciar a una bona puntuació.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="dificultats">
+      <h2>Dificultats</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nivell</th>
+            <th>Tauler</th>
+            <th>Trampes</th>
+            <th>Punts base</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fàcil</strong></td>
+            <td>9 x 9</td>
+            <td>10</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td><strong>Intermèdia</strong></td>
+            <td>16 x 16</td>
+            <td>40</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td><strong>Difícil</strong></td>
+            <td>24 x 16</td>
+            <td>75</td>
+            <td>350</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="risk" id="ampliacio">
+      <h2>L'Ampliació Maleïda</h2>
+      <p>
+        Aquesta és la mecànica diferencial del joc. Quan guanyes una partida, el joc no acaba
+        necessàriament: pots assegurar els punts o acceptar el risc d'ampliar el tauler.
+      </p>
+      <div class="risk-panel">
+        <div class="choice safe">
+          <span class="icon">✓</span>
+          <h3>Assegurar punts</h3>
+          <p>Guarda la puntuació obtinguda, registra la partida a la base de dades i torna al menú.</p>
+        </div>
+        <div class="choice danger">
+          <span class="icon">🔥</span>
+          <h3>Ampliar tauler</h3>
+          <p>S'afegeixen caselles i trampes noves. Si tornes a guanyar, el multiplicador augmenta. Si et quedes sense vides, ho perds tot.</p>
+        </div>
+      </div>
+      <div class="score-row">
+        <div class="score">Victòria<br>x1</div>
+        <div class="score">1 ampliació<br>x2</div>
+        <div class="score">2 ampliacions<br>x4</div>
+        <div class="score">3 ampliacions<br>x8</div>
+      </div>
+    </section>
+
+    <section id="puntuacio">
+      <h2>Puntuació</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Fórmula general</h3>
+          <p>
+            La puntuació combina els punts base de la dificultat, el temps de partida i el bonus del personatge.
+            Com més ràpid resolguis el tauler, millor serà el resultat.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Derrota</h3>
+          <p>
+            Quan el personatge es queda sense vides, la derrota registra <strong>0 punts</strong>.
+            Això inclou quedar-se sense vides després d'haver acceptat una ampliació.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ranquing">
+      <h2>Rànquing</h2>
+      <p>
+        El joc desa els resultats a MySQL quan la base de dades està disponible. Si no hi ha connexió,
+        es pot jugar igualment en mode offline, però les partides no es guarden.
+      </p>
+      <div class="grid two">
+        <div class="card">
+          <span class="icon">🏆</span>
+          <h3>Millor partida</h3>
+          <p>Mostra les puntuacions més altes aconseguides en una sola partida.</p>
+        </div>
+        <div class="card">
+          <span class="icon">📊</span>
+          <h3>Puntuació total</h3>
+          <p>Acumula els punts de totes les partides guanyades per cada jugador.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">
+      Buscamines del Regne Maleït · Projecte Java Swing + MySQL · Manual d'instruccions
+    </p>
+  </main>
+</body>
+</html>
