@@ -1,0 +1,22 @@
+Las 3 consultas para verificar
+Copia y pega cada una y pulsa el rayo ⚡:
+
+Ver todos los jugadores registrados:
+
+sql
+USE buscamines_regne;
+SELECT * FROM usuaris;
+Ver todas las partidas guardadas:
+
+sql
+SELECT * FROM partides ORDER BY data_partida DESC;
+Ver el rànquing completo (como lo ve el juego):
+
+sql
+SELECT u.nom_jugador, MAX(p.puntuacio_obtinguda) AS millor_puntuacio,
+       p.tipus_personatge, p.ampliacions, p.temps_segons
+FROM partides p
+JOIN usuaris u ON p.id_usuari = u.id_usuari
+WHERE p.resultat = 'victoria'
+GROUP BY u.nom_jugador, p.tipus_personatge, p.ampliacions, p.temps_segons
+ORDER BY millor_puntuacio DESC;
